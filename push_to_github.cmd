@@ -38,11 +38,14 @@ if %ERRORLEVEL% NEQ 0 (
     echo.
     echo [SUCCESS] Code pushed to GitHub!
     echo.
-    echo Next step:
-    echo 1. Open https://render.com in your browser (Log in with GitHub - 100%% Free, No Credit Card)
-    echo 2. Click "New +" -> "Blueprint"
-    echo 3. Select your "mihiracle" repository
-    echo 4. Click "Apply" - Render will automatically launch your live app 24/7!
+    echo Next step to turn on GitHub Pages:
+    echo 1. Open your repository on GitHub in your browser.
+    echo 2. Go to "Settings" tab ^> Click "Pages" on the left menu.
+    echo 3. Under "Build and deployment" -^> "Source", change it to:
+    echo        "GitHub Actions"
+    echo 4. GitHub will automatically build and publish your app!
+    echo    In ~60 seconds, your live link will be ready:
+    echo        https://^<your-username^>.github.io/mihiracle/
 )
 
 echo.
