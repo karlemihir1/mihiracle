@@ -30,7 +30,8 @@ export const HomePage: React.FC = () => {
     savedBooks, 
     stashes, 
     recentActivity,
-    streak 
+    streak,
+    setDiscoverModalOpen 
   } = useStore();
 
   // Greeting based on current time
@@ -108,17 +109,53 @@ export const HomePage: React.FC = () => {
         {/* Global Search Bar */}
         <div 
           onClick={() => navigate('/search')}
-          className="relative bg-white dark:bg-dark-surface border border-brand-border dark:border-dark-border rounded-2xl p-3 sm:p-3.5 shadow-card hover:border-brand-navy dark:hover:border-brand-mint transition-all cursor-pointer flex items-center justify-between group"
+          className="relative bg-[#161822] border border-[#262A38] rounded-2xl p-3 sm:p-3.5 shadow-xl hover:border-[#D4FF00]/50 transition-all cursor-pointer flex items-center justify-between group"
         >
-          <div className="flex items-center gap-3 text-brand-muted dark:text-dark-muted flex-1 pr-2">
-            <Search className="w-5 h-5 text-brand-muted group-hover:text-brand-navy dark:group-hover:text-brand-mint transition-colors" />
+          <div className="flex items-center gap-3 text-[#8E92A4] flex-1 pr-2">
+            <Search className="w-5 h-5 text-[#8E92A4] group-hover:text-[#D4FF00] transition-colors" />
             <span className="text-sm truncate">
-              Search ideas, books, topics, or ask AI...
+              Search ideas, theories, books, or ask AI...
             </span>
           </div>
-          <span className="text-xs px-2.5 py-1 bg-brand-bg dark:bg-dark-card rounded-lg font-medium text-brand-navy dark:text-brand-mint border border-brand-border/60 dark:border-dark-border/60 shrink-0">
+          <span className="text-xs px-2.5 py-1 bg-white/5 rounded-lg font-semibold text-[#D4FF00] border border-white/10 shrink-0">
             Search
           </span>
+        </div>
+
+        {/* HERO FEATURE: Discover New Ideas & Theories (Capi Creative Styled) */}
+        <div className="relative overflow-hidden rounded-[28px] bg-gradient-to-br from-[#161824] via-[#1B1E2D] to-[#12141D] border border-white/10 p-5 sm:p-7 shadow-2xl">
+          {/* Ambient Lighting Orbs */}
+          <div className="absolute -top-16 -right-16 w-48 h-48 bg-[#D4FF00]/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-[#00F0FF]/10 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="relative flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
+            <div className="space-y-2 max-w-lg">
+              <div className="flex items-center gap-2">
+                <span className="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold bg-[#00F0FF]/15 text-[#00F0FF] border border-[#00F0FF]/30 tracking-wide uppercase">
+                  ⚡ Breakthrough Theories
+                </span>
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#D4FF00]/15 text-[#D4FF00]">
+                  New
+                </span>
+              </div>
+              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white leading-snug">
+                Expand your perception with transformative mental models
+              </h2>
+              <p className="text-xs sm:text-sm text-[#8E92A4] leading-relaxed">
+                Explore deep scientific paradigms, philosophical paradoxes, and counter-intuitive insights designed for fast microlearning.
+              </p>
+            </div>
+
+            {/* The Main On-Screen Discover Button */}
+            <button
+              onClick={() => setDiscoverModalOpen(true)}
+              className="w-full md:w-auto shrink-0 flex items-center justify-center gap-2.5 px-6 py-4 rounded-2xl bg-[#D4FF00] hover:bg-[#c2eb00] text-black font-extrabold text-sm shadow-[0_0_25px_rgba(212,255,0,0.4)] active:scale-95 transition-all cursor-pointer group"
+            >
+              <Sparkles className="w-5 h-5 text-black fill-black group-hover:rotate-12 transition-transform" />
+              <span>Discover New Ideas & Theories</span>
+              <ArrowRight className="w-4 h-4 text-black stroke-[2.5px] group-hover:translate-x-1 transition-transform" />
+            </button>
+          </div>
         </div>
       </section>
 
@@ -340,6 +377,19 @@ export const HomePage: React.FC = () => {
           <BookCard book={bookOfTheDay} />
         </section>
       )}
+
+      {/* Floating Quick Discover Pill */}
+      <div className="fixed bottom-20 md:bottom-8 right-4 sm:right-8 z-30">
+        <button
+          onClick={() => setDiscoverModalOpen(true)}
+          className="flex items-center gap-2 px-4 py-3 rounded-full bg-[#D4FF00] hover:bg-[#c2eb00] text-black font-extrabold text-xs shadow-[0_0_25px_rgba(212,255,0,0.45)] hover:scale-105 active:scale-95 transition-all cursor-pointer group"
+          aria-label="Discover New Ideas & Theories"
+          title="Discover New Theories"
+        >
+          <Sparkles className="w-4 h-4 text-black fill-black group-hover:rotate-12 transition-transform" />
+          <span className="font-extrabold tracking-tight">Discover Theories</span>
+        </button>
+      </div>
     </div>
   );
 };

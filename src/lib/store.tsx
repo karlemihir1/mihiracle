@@ -88,6 +88,10 @@ interface StoreContextType {
   setActiveContextItem: (ctx: { type: 'idea' | 'book' | 'stash'; title: string; content?: string } | null) => void;
   isAIAssistantOpen: boolean;
   setAIAssistantOpen: (open: boolean) => void;
+  isSideMenuOpen: boolean;
+  setSideMenuOpen: (open: boolean) => void;
+  isDiscoverModalOpen: boolean;
+  setDiscoverModalOpen: (open: boolean) => void;
 }
 
 const StoreContext = createContext<StoreContextType | undefined>(undefined);
@@ -104,7 +108,7 @@ const DEFAULT_PROFILE: Profile = {
   interests: ['Business', 'Psychology', 'Productivity', 'Technology & AI', 'Philosophy'],
   daily_goal_minutes: 10,
   onboarding_completed: false,
-  preferred_theme: 'light',
+  preferred_theme: 'dark',
 };
 
 const getTodayDateString = (): string => {
@@ -282,7 +286,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   });
 
   const [theme, setThemeState] = useState<'light' | 'dark' | 'system'>(() => {
-    return (localStorage.getItem('mihiracle_theme') as any) || 'light';
+    return (localStorage.getItem('mihiracle_theme') as any) || 'dark';
   });
 
   const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine);
@@ -290,6 +294,8 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [isLoadingAuth, setIsLoadingAuth] = useState(false);
   const [activeContextItem, setActiveContextItem] = useState<{ type: 'idea' | 'book' | 'stash'; title: string; content?: string } | null>(null);
   const [isAIAssistantOpen, setAIAssistantOpen] = useState(false);
+  const [isSideMenuOpen, setSideMenuOpen] = useState(false);
+  const [isDiscoverModalOpen, setDiscoverModalOpen] = useState(false);
 
   // Sync state to LocalStorage
   useEffect(() => {
@@ -835,6 +841,10 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       setActiveContextItem,
       isAIAssistantOpen,
       setAIAssistantOpen,
+      isSideMenuOpen,
+      setSideMenuOpen,
+      isDiscoverModalOpen,
+      setDiscoverModalOpen,
     }}>
       {children}
     </StoreContext.Provider>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, Sparkles, WifiOff, Sun, Moon, Laptop, Plus } from 'lucide-react';
+import { Search, Sparkles, WifiOff, Sun, Moon, Laptop, Menu } from 'lucide-react';
 import { useStore } from '../../lib/store';
 import { HabitStreakBadge } from '../habit/HabitStreakBadge';
 
@@ -9,6 +9,8 @@ export const Header: React.FC = () => {
   const { 
     isOnline, 
     setAIAssistantOpen, 
+    setSideMenuOpen,
+    setDiscoverModalOpen,
     theme, 
     setTheme 
   } = useStore();
@@ -20,29 +22,42 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <header className="sticky top-0 z-30 bg-brand-bg/90 dark:bg-dark-bg/90 backdrop-blur-md border-b border-brand-border/60 dark:border-dark-border/60 transition-colors">
-      <div className="flex items-center justify-between px-4 py-3 max-w-5xl mx-auto">
-        {/* Mobile Left: Brand / Logo */}
-        <div className="md:hidden flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-brand-navy flex items-center justify-center shadow-xs">
-            <img src="/favicon.svg" alt="Mihiracle" className="w-5 h-5" />
+    <header className="sticky top-0 z-30 bg-[#0B0C10]/90 text-white backdrop-blur-xl border-b border-[#262A38] transition-colors">
+      <div className="flex items-center justify-between px-3 sm:px-6 py-2.5 max-w-5xl mx-auto gap-2">
+        {/* Left Side: Toggle Menu Button & Brand */}
+        <div className="flex items-center gap-2">
+          {/* Left Side Menu Toggle Button */}
+          <button
+            onClick={() => setSideMenuOpen(true)}
+            className="p-2 -ml-1 rounded-2xl bg-white/5 hover:bg-white/10 text-white active:scale-95 transition-all flex items-center justify-center min-h-[42px] min-w-[42px] border border-white/5 shadow-xs cursor-pointer"
+            aria-label="Toggle Side Menu"
+            title="Open Navigation Menu"
+          >
+            <Menu className="w-5 h-5 text-[#D4FF00]" />
+          </button>
+
+          {/* Mobile Brand / Logo */}
+          <div className="md:hidden flex items-center gap-2">
+            <div className="w-7 h-7 rounded-xl bg-[#D4FF00] flex items-center justify-center shadow-[0_0_12px_rgba(212,255,0,0.4)]">
+              <span className="font-extrabold text-black text-sm">M</span>
+            </div>
+            <span className="font-bold text-base text-white tracking-tight">
+              Mihiracle
+            </span>
           </div>
-          <span className="font-serif font-bold text-lg text-brand-navy dark:text-white tracking-tight">
-            Mihiracle
-          </span>
         </div>
 
-        {/* Desktop Left: Context or Quick Search */}
-        <div className="hidden md:flex items-center flex-1 max-w-md">
+        {/* Desktop Center: Search Bar */}
+        <div className="hidden md:flex items-center flex-1 max-w-md mx-3">
           <button
             onClick={() => navigate('/search')}
-            className="w-full flex items-center justify-between px-3.5 py-2 bg-white dark:bg-dark-surface border border-brand-border dark:border-dark-border rounded-xl text-sm text-brand-muted dark:text-dark-muted hover:border-brand-navy dark:hover:border-brand-mint transition-colors shadow-2xs group cursor-pointer"
+            className="w-full flex items-center justify-between px-4 py-2 bg-[#161822] border border-[#262A38] hover:border-[#D4FF00]/50 rounded-2xl text-xs text-[#8E92A4] hover:text-white transition-all shadow-xs group cursor-pointer"
           >
             <div className="flex items-center gap-2.5">
-              <Search className="w-4 h-4 text-brand-muted group-hover:text-brand-navy dark:group-hover:text-brand-mint transition-colors" />
-              <span>Search ideas, books, topics, or ask AI...</span>
+              <Search className="w-4 h-4 text-[#8E92A4] group-hover:text-[#D4FF00] transition-colors" />
+              <span>Search ideas, theories, books...</span>
             </div>
-            <kbd className="hidden sm:inline-block px-1.5 py-0.5 text-[10px] font-semibold bg-stone-100 dark:bg-dark-border text-stone-500 dark:text-stone-400 rounded border border-stone-200 dark:border-stone-700">
+            <kbd className="px-1.5 py-0.5 text-[10px] font-semibold bg-white/5 text-[#8E92A4] rounded border border-white/10">
               /
             </kbd>
           </button>
@@ -50,21 +65,31 @@ export const Header: React.FC = () => {
 
         {/* Right Actions */}
         <div className="flex items-center gap-1.5 sm:gap-2">
+          {/* On-Screen Action: Discover New Theories Button */}
+          <button
+            onClick={() => setDiscoverModalOpen(true)}
+            className="flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-2xl bg-[#D4FF00] hover:bg-[#c2eb00] text-black font-extrabold text-xs shadow-[0_0_20px_rgba(212,255,0,0.35)] active:scale-95 transition-all min-h-[40px] cursor-pointer"
+            title="Discover New Theories & Ideas"
+          >
+            <Sparkles className="w-4 h-4 text-black fill-black" />
+            <span className="whitespace-nowrap">Discover Theories</span>
+          </button>
+
           {/* Daily Habit Streak Badge */}
           <HabitStreakBadge />
 
           {/* Offline indicator */}
           {!isOnline && (
-            <div className="flex items-center gap-1 px-2.5 py-1 bg-amber-100 dark:bg-amber-900/40 text-amber-800 dark:text-amber-200 rounded-full text-xs font-medium">
+            <div className="flex items-center gap-1 px-2.5 py-1 bg-amber-500/15 border border-amber-500/30 text-amber-300 rounded-full text-xs font-medium">
               <WifiOff className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Offline Mode</span>
+              <span className="hidden sm:inline">Offline</span>
             </div>
           )}
 
           {/* Mobile Search Button */}
           <button
             onClick={() => navigate('/search')}
-            className="md:hidden p-2 rounded-xl text-brand-text dark:text-dark-text hover:bg-black/5 dark:hover:bg-white/5 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+            className="md:hidden p-2 rounded-xl text-[#8E92A4] hover:text-white hover:bg-white/5 transition-colors min-h-[40px] min-w-[40px] flex items-center justify-center cursor-pointer"
             aria-label="Open Search"
           >
             <Search className="w-5 h-5" />
@@ -73,22 +98,22 @@ export const Header: React.FC = () => {
           {/* AI Companion Quick Trigger */}
           <button
             onClick={() => setAIAssistantOpen(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-brand-mint text-brand-navy font-semibold text-xs hover:bg-brand-mint-dark transition-all active:scale-95 shadow-2xs min-h-[40px] cursor-pointer"
+            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-2xl bg-[#1A1D27] hover:bg-[#222634] text-white border border-white/10 font-semibold text-xs transition-all active:scale-95 shadow-xs min-h-[40px] cursor-pointer"
             aria-label="Open AI Assistant"
           >
-            <Sparkles className="w-4 h-4 text-brand-navy fill-brand-navy/20" />
-            <span className="hidden sm:inline">Ask AI</span>
+            <Sparkles className="w-4 h-4 text-[#00F0FF]" />
+            <span>Ask AI</span>
           </button>
 
           {/* Theme Toggle (Mobile) */}
           <button
             onClick={cycleTheme}
-            className="md:hidden p-2 text-brand-muted hover:text-brand-text dark:text-dark-muted dark:hover:text-dark-text rounded-xl hover:bg-black/5 dark:hover:bg-white/5 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+            className="md:hidden p-2 text-[#8E92A4] hover:text-white rounded-xl hover:bg-white/5 transition-colors min-h-[40px] min-w-[40px] flex items-center justify-center cursor-pointer"
             aria-label="Toggle theme"
           >
-            {theme === 'light' && <Sun className="w-4 h-4 text-amber-500" />}
-            {theme === 'dark' && <Moon className="w-4 h-4 text-brand-mint" />}
-            {theme === 'system' && <Laptop className="w-4 h-4" />}
+            {theme === 'light' && <Sun className="w-4 h-4 text-amber-400" />}
+            {theme === 'dark' && <Moon className="w-4 h-4 text-[#D4FF00]" />}
+            {theme === 'system' && <Laptop className="w-4 h-4 text-white" />}
           </button>
         </div>
       </div>
