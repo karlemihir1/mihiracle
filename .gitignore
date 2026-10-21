@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Local Windows Tools
+tools/node20/
+tools/cloudflared.exe
+
+# Environment and sensitive keys
+.env
+.env.local
+.env.*.local
+
+# Build outputs
+dist/
+dist-ssr/
+*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# System and Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

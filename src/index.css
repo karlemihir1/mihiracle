@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --brand-navy: #192D3A;
+    --brand-mint: #B8E7BF;
+    --brand-bg: #F7F8F5;
+    --brand-surface: #FFFFFF;
+    --brand-text: #17252D;
+    --brand-muted: #6B7780;
+    --brand-border: #E5E8E2;
+  }
+
+  html.dark {
+    --brand-bg: #0D151C;
+    --brand-surface: #16232E;
+    --brand-text: #F1F5F9;
+    --brand-muted: #94A3B8;
+    --brand-border: #2A3C4D;
+  }
+
+  body {
+    background-color: var(--brand-bg);
+    color: var(--brand-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+/* Safe area padding utilities for mobile phones with bottom bars and notches */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 1rem);
+}
+
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 1rem);
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(107, 119, 128, 0.25);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(107, 119, 128, 0.45);
+}
+
+/* Hide scrollbar for clean horizontal swipe rows */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Editorial typography for reading mode */
+.prose-editorial {
+  font-family: 'Newsreader', Georgia, Cambria, serif;
+  font-size: 1.15rem;
+  line-height: 1.75;
+}

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="navyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#243F52" />
+      <stop offset="100%" stop-color="#12212B" />
+    </linearGradient>
+    <linearGradient id="mintGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#DDF5E1" />
+      <stop offset="100%" stop-color="#8FD89B" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Outer Rounded Squircle -->
+  <rect x="5" y="5" width="90" height="90" rx="24" fill="url(#navyGrad)" />
+  
+  <!-- Mind Stash Box / Gem Geometry -->
+  <!-- Top Lid / Prism -->
+  <path d="M50 22 L76 36 L50 50 L24 36 Z" fill="url(#mintGrad)" />
+  
+  <!-- Left Facet -->
+  <path d="M24 36 L50 50 L50 76 L24 62 Z" fill="#B8E7BF" fill-opacity="0.85" />
+  
+  <!-- Right Facet -->
+  <path d="M50 50 L76 36 L76 62 L50 76 Z" fill="#8FD89B" />
+  
+  <!-- Center Learning Spark / Light Core -->
+  <circle cx="50" cy="48" r="5" fill="#FFFFFF" />
+  <path d="M50 38 L50 58 M40 48 L60 48" stroke="#192D3A" stroke-width="2" stroke-linecap="round" />
+</svg>

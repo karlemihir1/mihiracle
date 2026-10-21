@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: mihiracle
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm run server:start
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: PORT
+        value: 10000
+      - key: SEARCH_PROVIDER
+        value: live-web
+      - key: FORCE_DEMO_MODE
+        value: false
